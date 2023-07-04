@@ -17,7 +17,8 @@ namespace MySallers.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message"] = "Projeto Criado para portifólio";
+            ViewData["Programador"] = ": Matheus Hert Lomando";
 
             return View();
         }
