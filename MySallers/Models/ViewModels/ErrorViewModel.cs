@@ -1,5 +1,6 @@
 using System;
 
+
 namespace MySallers.Models.WiewModels
 {
     public class ErrorViewModel
