@@ -15,7 +15,7 @@ namespace MySallers.Data
         }
 
         public DbSet<Departamento> Departamento { get; set; }
-        public DbSet <Vendedores> Vendedor { get; set; }
+        public DbSet <Vendedores> Vendedores { get; set; }
         public DbSet<HistoricoVendas> HistoricoVendas { get; set; }
     }
 }

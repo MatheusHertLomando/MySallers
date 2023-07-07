@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 
@@ -19,13 +20,13 @@ namespace MySallers.Models
         {
         }
 
-        public Vendedores(int id, string name, DateTime dataNasc, string email, double salarioBase, Departamento departamento)
+        public Vendedores(int id, string name, string email, DateTime dataNasc, double SalarioBase, Departamento departamento)
         {
             Id = id;
             Name = name;
-            DataNasc = dataNasc;
             Email = email;
-            SalarioBase = salarioBase;
+            DataNasc = DataNasc;
+            SalarioBase = SalarioBase;
             Departamento = departamento;
         }
 
