@@ -11,6 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MySallers.Data;
+using MySallers.Services;
 
 
 namespace MySallers
@@ -42,6 +43,7 @@ namespace MySallers
                     builder.MigrationsAssembly("MySallers")));
 
             services.AddScoped<SeedingService>();
+            services.AddScoped<VendedorService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
