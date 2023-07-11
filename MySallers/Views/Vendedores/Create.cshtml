@@ -1,4 +1,4 @@
-﻿@model MySallers.Models.Vendedores
+﻿@model MySallers.Models.ViewModels.VendedorFormViewModel
 
 @{
     ViewData["Title"] = "Criar Novo Vendedor";
@@ -13,23 +13,27 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
+                <label asp-for="Vendedores.Name" class="control-label"></label>
+                <input asp-for="Vendedores.Name" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
+                <label asp-for="Vendedores.Email" class="control-label"></label>
+                <input asp-for="Vendedores.Email" class="form-control" />
             </div><div class="form-group">
-                <label asp-for="DataNasc" class="control-label"></label>
-                <input asp-for="DataNasc" class="form-control" />
+                <label asp-for="Vendedores.DataNasc" class="control-label"></label>
+                <input asp-for="Vendedores.DataNasc" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="SalarioBase" class="control-label"></label>
-                <input asp-for="SalarioBase" class="form-control" />
+                <label asp-for="Vendedores.SalarioBase" class="control-label"></label>
+                <input asp-for="Vendedores.SalarioBase" class="form-control" />
             </div>
-          <div calss="form-group">
-              <input type="submit" value="Criar" class="btn btn-default" />
-          </div>
+            <div class="form-group">
+                <label asp-for="Vendedores.DepartamentoId" class="control-label"></label>
+                <select asp-for="Vendedores.DepartamentoId" asp-items="@(new SelectList(Model.Departamentos,"Id","Name"))" class="form-control"></select>
+            </div>
+            <div calss="form-group">
+                <input type="submit" value="Criar" class="btn btn-default" />
+            </div>
         </form>
     </div>
 </div>

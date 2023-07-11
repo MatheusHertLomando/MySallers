@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MySallers.Models;
+using MySallers.Models.ViewModels;
 using MySallers.Services;
 using System;
 using System.Collections.Generic;
@@ -12,10 +13,13 @@ namespace MySallers.Controllers
     {
 
         private readonly VendedorService _vendedorService;
+        private readonly DepartamentoService _departamentoService;
+       
 
-        public VendedoresController(VendedorService vendedorService)
+        public VendedoresController(VendedorService vendedorService, DepartamentoService departamentoService)
         {
             _vendedorService = vendedorService;
+            _departamentoService = departamentoService;
         }
 
         public IActionResult Index()
@@ -26,14 +30,16 @@ namespace MySallers.Controllers
 
         public IActionResult Create()
         {
-            return View();
+            var departamentos = _departamentoService.FindAll();
+            var viewModel = new VendedorFormViewModel { Departamentos = departamentos };
+            return View(viewModel);
         }
 
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public IActionResult Create(Vendedores Vendedor)
+        public IActionResult Create(Vendedores Vendedores)
         {
-            _vendedorService.Insert(Vendedor);
+            _vendedorService.Insert(Vendedores);
             return RedirectToAction(nameof(Index));
         }
     }

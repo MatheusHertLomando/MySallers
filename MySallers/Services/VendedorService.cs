@@ -23,6 +23,7 @@ namespace MySallers.Services
 
         public void Insert(Vendedores obj)
         {
+            
             _context.Add(obj);
             _context.SaveChanges();
         }
