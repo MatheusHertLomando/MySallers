@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MySallers.Models;
 using MySallers.Services;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,19 @@ namespace MySallers.Controllers
         {
             var list = _vendedorService.FindAll();
             return View(list);
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        public IActionResult Create(Vendedores Vendedor)
+        {
+            _vendedorService.Insert(Vendedor);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

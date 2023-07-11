@@ -20,5 +20,11 @@ namespace MySallers.Services
         {
             return _context.Vendedores.ToList();
         }
+
+        public void Insert(Vendedores obj)
+        {
+            _context.Add(obj);
+            _context.SaveChanges();
+        }
     }
 }
