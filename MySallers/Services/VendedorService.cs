@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MySallers.Data;
 using MySallers.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace MySallers.Services
 {
@@ -30,7 +31,7 @@ namespace MySallers.Services
 
         public Vendedores FindById(int id)
         {
-            return _context.Vendedores.FirstOrDefault(obj => obj.Id == id);
+            return _context.Vendedores.Include(obj => obj.Departamento).FirstOrDefault(obj => obj.Id == id);
         }
 
         public void Remove(int id)
