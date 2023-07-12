@@ -2,6 +2,7 @@
 using MySallers.Models;
 using MySallers.Models.ViewModels;
 using MySallers.Services;
+using MySallers.Services.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace MySallers.Controllers
 
         private readonly VendedorService _vendedorService;
         private readonly DepartamentoService _departamentoService;
-       
+
 
         public VendedoresController(VendedorService vendedorService, DepartamentoService departamentoService)
         {
@@ -80,6 +81,49 @@ namespace MySallers.Controllers
             }
 
             return View(obj);
+        }
+
+        public IActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var obj = _vendedorService.FindById(id.Value);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            List<Departamento> departamentos = _departamentoService.FindAll();
+            VendedorFormViewModel viewModel = new VendedorFormViewModel { Vendedores = obj, Departamentos = departamentos };
+            return View(viewModel);
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, Vendedores vendedores)
+        {
+            if (id != vendedores.Id)
+            {
+                return BadRequest();
+            }
+            try
+            {
+                _vendedorService.Update(vendedores);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
+            catch (DbConcurrencyException)
+            {
+                return BadRequest();
+            }
+
         }
     }
 }

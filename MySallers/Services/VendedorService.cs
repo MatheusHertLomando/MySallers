@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using MySallers.Data;
 using MySallers.Models;
 using Microsoft.EntityFrameworkCore;
+using MySallers.Services.Exceptions;
 
 namespace MySallers.Services
 {
@@ -39,6 +40,23 @@ namespace MySallers.Services
             var obj = _context.Vendedores.Find(id);
             _context.Vendedores.Remove(obj);
             _context.SaveChanges();
+        }
+
+        public void Update(Vendedores obj)
+        {
+            if (!_context.Vendedores.Any(x => x.Id == obj.Id))
+            {
+                throw new NotFoundException("Id não encontrado");
+            }
+            try
+            {
+                _context.Update(obj);
+                _context.SaveChanges();
+            }
+           catch (DbUpdateConcurrencyException e)
+            {
+                throw new DbConcurrencyException(e.Message);
+            }
         }
     }
 }
