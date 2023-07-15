@@ -10,9 +10,18 @@ namespace MySallers.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
+        [Display(Name = "Data de Nascimento")]
+        [DataType(DataType.Date)]
         public DateTime DataNasc { get; set; }
+
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
+
+        [Display(Name = "Salário Base")]
+        [DisplayFormat(DataFormatString ="{0:F2}")]
         public double SalarioBase { get; set; }
+
         public Departamento Departamento { get; set; }
         public int DepartamentoId { get; set; }
         public ICollection<HistoricoVendas> Vendas { get; set; } = new List<HistoricoVendas>();
