@@ -7,26 +7,31 @@
 <h2>@ViewData["Title"]</h2>
 
 <h4>Vendedor</h4>
-<hr/>
+<hr />
 <div class="row">
-    
+
     <div class="col-md-4">
         <form asp-action="Create">
+            
             <div class="form-group">
                 <label asp-for="Vendedores.Name" class="control-label"></label>
                 <input asp-for="Vendedores.Name" class="form-control" />
+                <span asp-validation-for="Vendedores.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Vendedores.Email" class="control-label"></label>
                 <input asp-for="Vendedores.Email" class="form-control" />
+                <span asp-validation-for="Vendedores.Email" class="text-danger"></span>
             </div><div class="form-group">
                 <label asp-for="Vendedores.DataNasc" class="control-label"></label>
                 <input asp-for="Vendedores.DataNasc" class="form-control" />
+            <span asp-validation-for="Vendedores.DataNasc" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Vendedores.SalarioBase" class="control-label"></label>
-                <input asp-for="Vendedores.SalarioBase" class="form-control" />
-            </div>
+                  <div class="form-group">
+                      <label asp-for="Vendedores.SalarioBase" class="control-label"></label>
+                      <input asp-for="Vendedores.SalarioBase" class="form-control" />
+                      <span asp-validation-for="Vendedores.SalarioBase" class="text-danger"></span>
+                  </div>
             <div class="form-group">
                 <label asp-for="Vendedores.DepartamentoId" class="control-label"></label>
                 <select asp-for="Vendedores.DepartamentoId" asp-items="@(new SelectList(Model.Departamentos,"Id","Name"))" class="form-control"></select>
@@ -37,3 +42,7 @@
         </form>
     </div>
 </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

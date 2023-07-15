@@ -9,15 +9,24 @@ namespace MySallers.Models
     public class Vendedores
     {
         public int Id { get; set; }
+
+        [Required(ErrorMessage = "{0} Obrigatório")]
+        [StringLength(60, MinimumLength = 3, ErrorMessage = "{0} não pode conter menos de {2} ou maximo de {1} caracteres")]
+        [Display(Name = "Nome")]
         public string Name { get; set; }
 
+        [Required(ErrorMessage = "{0} Obrigatório")]
         [Display(Name = "Data de Nascimento")]
         [DataType(DataType.Date)]
         public DateTime DataNasc { get; set; }
 
+        [Required(ErrorMessage = "{0} Obrigatório")]
+        [EmailAddress(ErrorMessage = "Coloque um email valido")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
+        [Required(ErrorMessage = "{0} Obrigatório")]
+        [Range(100.0, 50000.0, ErrorMessage = "{0} Tem que ser {1} e {2}")]
         [Display(Name = "Salário Base")]
         [DisplayFormat(DataFormatString ="{0:F2}")]
         public double SalarioBase { get; set; }

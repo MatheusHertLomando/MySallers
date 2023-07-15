@@ -39,9 +39,15 @@ namespace MySallers.Controllers
 
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public IActionResult Create(Vendedores Vendedores)
+        public IActionResult Create(Vendedores vendedores)
         {
-            _vendedorService.Insert(Vendedores);
+            if (!ModelState.IsValid)
+            {
+                var departamentos = _departamentoService.FindAll();
+                var viewModel = new VendedorFormViewModel { Vendedores = vendedores, Departamentos = departamentos };
+                return View(viewModel);
+            }
+            _vendedorService.Insert(vendedores);
             return RedirectToAction(nameof(Index));
         }
 
@@ -107,6 +113,12 @@ namespace MySallers.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, Vendedores vendedores)
         {
+            if (!ModelState.IsValid)
+            {
+                var departamentos = _departamentoService.FindAll();
+                var viewModel = new VendedorFormViewModel { Vendedores = vendedores, Departamentos = departamentos };
+                return View(viewModel);
+            }
             if (id != vendedores.Id)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não incorreto" });
